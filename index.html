@@ -382,6 +382,16 @@
     <!-- Custom Theme JavaScript -->
     <script src="js/freelancer.js"></script>
 
+    <script>
+        var file = "https://raw.githubusercontent.com/pedroluislopez/podemosencomun/master/signs";
+        signsContainer = $("section#signs div.container")
+        $.get(file,function(txt){
+            var lines = txt.responseText.split("\n");
+            for (var i = 0, len = lines.length; i < len; i++) {
+                console.log(signsContainer);
+            }
+        }); 
+    </script>
 </body>
 
 </html>
