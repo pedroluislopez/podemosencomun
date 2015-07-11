@@ -1,0 +1,4 @@
+.vagrant/
+podemosencomun.sublime-project
+podemosencomun.sublime-workspace
+provisioning/vagrant_ansible_inventory

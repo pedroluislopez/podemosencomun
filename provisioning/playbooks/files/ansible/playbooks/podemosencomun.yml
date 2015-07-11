@@ -1,0 +1,28 @@
+---
+
+- name: Manage vagrant podemosencomun provisioning
+  hosts: 'podemosencomun'
+  sudo: True
+
+  roles:
+
+    - role: debops.sshd
+      sshd_AllowGroups: 'root admins sshusers sftponly vagrant'
+      tags: sshd
+
+    - role: debops.nginx
+      nginx_http_options: |
+        ssl_session_cache shared:SSL:10m;
+        ssl_session_timeout 5m;
+        sendfile off;
+        tcp_nopush on;
+        tcp_nodelay on;
+        types_hash_max_size 2048;
+        gzip on;
+        gzip_disable "msie6";
+      nginx_servers:
+        - enabled: True
+          default: False
+          name: [ 'podemosencomun.nat.coopit.es' ]
+          root: '/vagrant'
+      tags: 'nginx'

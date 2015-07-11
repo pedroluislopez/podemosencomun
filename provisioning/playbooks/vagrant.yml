@@ -1,0 +1,25 @@
+---
+
+- name: Manage vagrant podemosencomun provisioning
+  hosts: 'podemosencomun'
+  sudo: True
+
+  vars:
+    workdir: /var/lib/ansible/local
+
+  tasks:
+    - name: Create local directory to work from
+      file: path={{ item }} state=directory owner=root group=root mode=0751
+      with_items:
+        - '{{ workdir }}/ansible/inventory'
+        - '{{ workdir }}/ansible/playbooks'
+
+    - name: Copy debops files
+      copy: src=files/{{ item }} dest={{ workdir }}/{{ item }} owner=root group=root mode=0640
+      with_items:
+        - .debops.cfg
+        - ansible/inventory/hosts
+        - ansible/playbooks/podemosencomun.yml
+
+    - name: Execute debops
+      command: bash -c "cd {{ workdir }} && debops ansible/playbooks/podemosencomun.yml -l podemosencomun"
