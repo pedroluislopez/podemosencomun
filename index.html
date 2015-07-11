@@ -205,14 +205,16 @@
             var lines = data.split('\n');
             for (var i = 0, len = lines.length; i < len; i++) {
                 sign = lines[i].split(" - ")
-                signsContainer.append("<div class=\"row\">" +
-                    "<div class=\"col-lg-4 col-lg-offset-2\">" +
-                    "<p>" + (i+1) + ". " + sign[0] +"</p>" +
-                    "</div>" +
-                    "<div class=\"col-lg-4\">" +
-                    "<p>" + sign[1] + "</p>" +
-                    "</div>" +
-                    "</div>")
+                if(!(sign[0] === undefined || sign[1] === undefined)) {
+                    signsContainer.append("<div class=\"row\">" +
+                        "<div class=\"col-lg-4 col-lg-offset-2\">" +
+                        "<p>" + (i+1) + ". " + sign[0] +"</p>" +
+                        "</div>" +
+                        "<div class=\"col-lg-4\">" +
+                        "<p>" + sign[1] + "</p>" +
+                        "</div>" +
+                        "</div>")
+                }
             }
         }); 
     </script>
